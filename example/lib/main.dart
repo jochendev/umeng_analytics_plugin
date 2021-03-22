@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     }
 
     setState(() {
-      _platformVersion = result ? 'OK' : 'ERROR';
+      _platformVersion = result == true ? 'OK' : 'ERROR';
     });
   }
 
