@@ -23,6 +23,9 @@ public class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
     @Override
     public void onMethodCall(MethodCall call, @NonNull MethodChannel.Result result) {
         switch (call.method) {
+            case "preInit":
+                preInit(call, result);
+                break;
             case "init":
                 init(call, result);
                 break;
@@ -53,6 +56,13 @@ public class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
             default:
                 result.notImplemented();
         }
+    }
+
+    private void preInit(MethodCall call, MethodChannel.Result result) {
+        final String androidKey = call.argument("androidKey");
+        final String channel = call.argument("channel");
+        UMConfigure.preInit(context, androidKey, channel);
+        result.success(true);
     }
 
     private void init(MethodCall call, MethodChannel.Result result) {
