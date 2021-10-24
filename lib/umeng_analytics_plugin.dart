@@ -42,6 +42,20 @@ class UmengAnalyticsPlugin {
     return _channel.invokeMethod<bool>('init', map);
   }
 
+  static Future<bool?> preInit({
+    required String androidKey,
+    required String iosKey,
+    String channel = '',
+  }) async {
+    var map = <String, dynamic>{
+      'androidKey': androidKey,
+      'iosKey': iosKey,
+      'channel': channel,
+    };
+
+    return _channel.invokeMethod<bool>('preInit', map);
+  }
+
   /// Send a page start event for [viewName]
   static Future<bool?> pageStart(String viewName) async {
     var map = <String, dynamic>{
